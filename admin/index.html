@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HABI :B — 관리자</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d0911;
+        --panel: #171019;
+        --line: rgba(255, 250, 254, 0.14);
+        --line2: rgba(255, 250, 254, 0.28);
+        --text: #fffafe;
+        --muted: #b79fb0;
+        --accent: #ff40ad;
+        --accent-deep: #de169a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      a { color: var(--accent); }
+      h1, h2, h3 { margin: 0; font-weight: 900; letter-spacing: -0.01em; }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 22px 16px 80px; }
+
+      /* login */
+      #login {
+        max-width: 340px;
+        margin: 14vh auto;
+        padding: 28px;
+        border: 1px solid var(--line2);
+        background: var(--panel);
+      }
+      #login h1 { font-size: 22px; margin-bottom: 4px; }
+      #login p { color: var(--muted); font-size: 12px; margin: 0 0 18px; }
+
+      .input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        border: 1px solid var(--line2);
+        border-radius: 0;
+        background: rgba(255, 250, 254, 0.05);
+        color: var(--text);
+        font: inherit;
+        font-size: 14px;
+      }
+      .input:focus { outline: none; border-color: var(--accent); }
+      textarea.input { min-height: 90px; resize: vertical; }
+      select.input { appearance: none; }
+      label { display: block; margin: 12px 0 5px; font-size: 12px; font-weight: 700; }
+      .hint { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        border: 1px solid var(--accent);
+        border-radius: 0;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 900;
+        cursor: pointer;
+      }
+      .btn.ghost { background: transparent; color: var(--accent); }
+      .btn.sm { padding: 6px 11px; font-size: 12px; }
+      .btn.del { border-color: #ff5c7a; background: transparent; color: #ff5c7a; }
+
+      /* top bar */
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line2);
+      }
+      .topbar h1 { font-size: 20px; margin-right: auto; }
+      .topbar .who { color: var(--muted); font-size: 12px; }
+
+      /* tabs */
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+      .tabs button {
+        padding: 8px 13px;
+        border: 1px solid var(--line2);
+        border-radius: 0;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .tabs button.on { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+      .panel {
+        margin-bottom: 18px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .panel > h2 { font-size: 15px; margin-bottom: 4px; }
+      .panel > .hint { margin-bottom: 12px; }
+      .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+      @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+      .tab-panel { display: none; }
+      .tab-panel.on { display: block; }
+
+      table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      th, td {
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        font-size: 13px;
+        vertical-align: top;
+      }
+      th { color: var(--muted); font-size: 11px; font-weight: 700; }
+      td:last-child, th:last-child { width: 60px; text-align: center; }
+
+      .row-add { display: grid; gap: 8px; margin-top: 12px; }
+      .save-bar {
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+        padding: 12px 0;
+        background: linear-gradient(0deg, var(--bg) 60%, transparent);
+      }
+      /* palette */
+      .pal { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .pal .sw { display: flex; align-items: center; gap: 10px; }
+      .pal input[type="color"] {
+        width: 42px; height: 34px; border: 1px solid var(--line2); background: none; padding: 0; cursor: pointer;
+      }
+      #toast {
+        position: fixed;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 11px 20px;
+        border: 1px solid var(--accent);
+        background: #140e18;
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 700;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s;
+        z-index: 100;
+      }
+      #toast.show { opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="login">
+      <h1>HABI :B</h1>
+      <p>관리자 로그인</p>
+      <label>이메일</label>
+      <input class="input" id="email" type="email" autocomplete="username" />
+      <label>비밀번호</label>
+      <input class="input" id="pw" type="password" autocomplete="current-password" />
+      <button class="btn" id="loginBtn" style="width: 100%; margin-top: 16px; justify-content: center">로그인</button>
+      <p class="hint" id="loginMsg"></p>
+    </div>
+
+    <!-- APP -->
+    <div class="wrap" id="app" hidden>
+      <div class="topbar">
+        <h1>HABI :B 관리자</h1>
+        <span class="who" id="who"></span>
+        <button class="btn ghost sm" id="logoutBtn">로그아웃</button>
+      </div>
+
+      <div class="tabs" id="tabs">
+        <button data-tab="profile" class="on">프로필</button>
+        <button data-tab="schedule">일정</button>
+        <button data-tab="song">노래책</button>
+        <button data-tab="dress">옷장</button>
+        <button data-tab="work">업보</button>
+        <button data-tab="theme">🎨 테마</button>
+        <button data-tab="inquiry">문의</button>
+      </div>
+
+      <!-- PROFILE -->
+      <section class="tab-panel on" id="tab-profile">
+        <div class="panel">
+          <h2>프로필 정보</h2>
+          <p class="hint">프로필 페이지 DOSSIER·인용·능력치·좋아싫어·링크에 반영됩니다.</p>
+          <div class="grid2">
+            <div><label>이름 (NAME)</label><input class="input" id="f-info-name" /></div>
+            <div><label>읽기 (READING)</label><input class="input" id="f-info-reading" /></div>
+            <div><label>키 (HEIGHT)</label><input class="input" id="f-info-height" /></div>
+            <div><label>데뷔 (DEBUT)</label><input class="input" id="f-info-debut" /><p class="hint">예: 2025. 02. 22</p></div>
+            <div><label>생일 (BIRTHDAY)</label><input class="input" id="f-info-birth" /><p class="hint">D-day 계산에 사용. 예: 01. 12</p></div>
+            <div><label>성별 (GENDER)</label><input class="input" id="f-info-gender" /></div>
+            <div><label>소속 (AGENCY)</label><input class="input" id="f-info-agency" /></div>
+            <div><label>팬네임 (FAN NAME)</label><input class="input" id="f-info-fandom" /></div>
+            <div><label>포인트 (POINT)</label><input class="input" id="f-info-point" /></div>
+            <div><label>페르소나 (PERSONA)</label><input class="input" id="f-info-persona" /></div>
+          </div>
+          <label>한마디 (QUOTE)</label>
+          <textarea class="input" id="f-quote"></textarea>
+          <div class="grid2">
+            <div><label>좋아 (LIKE)</label><input class="input" id="f-like-list" /><p class="hint">쉼표로 구분</p></div>
+            <div><label>싫어 (DISLIKE)</label><input class="input" id="f-dislike-list" /><p class="hint">쉼표로 구분</p></div>
+          </div>
+          <label>능력치 (STATS)</label>
+          <textarea class="input" id="f-stats"></textarea>
+          <p class="hint">한 줄에 하나. 형식: 이름:숫자(0~100). 예: 금쪽력:96</p>
+        </div>
+        <div class="panel">
+          <h2>링크</h2>
+          <div class="grid2">
+            <div><label>SOOP</label><input class="input" id="f-link-soop" /></div>
+            <div><label>YouTube</label><input class="input" id="f-link-youtube" /></div>
+            <div><label>Cafe</label><input class="input" id="f-link-cafe" /></div>
+            <div><label>Fancim</label><input class="input" id="f-link-fancim" /></div>
+          </div>
+        </div>
+        <div class="save-bar"><button class="btn" id="saveProfile">프로필 저장</button></div>
+      </section>
+
+      <!-- SCHEDULE -->
+      <section class="tab-panel" id="tab-schedule">
+        <div class="panel">
+          <h2>특별 일정</h2>
+          <p class="hint">월간 달력에 표시됩니다. 주간 요일표(매일 방송)는 사이트에 고정입니다.</p>
+          <table><thead><tr><th>날짜</th><th>제목</th><th>시간</th><th></th></tr></thead><tbody id="schedRows"></tbody></table>
+          <div class="row-add">
+            <input class="input" id="s-date" type="date" />
+            <input class="input" id="s-title" placeholder="제목 (예: 합방 콜라보)" />
+            <input class="input" id="s-time" placeholder="시간 (예: 18:00)" />
+            <button class="btn sm" id="addSched">추가</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SONG -->
+      <section class="tab-panel" id="tab-song">
+        <div class="panel">
+          <h2>노래책</h2>
+          <p class="hint">노래책 페이지 목록에 반영됩니다.</p>
+          <table><thead><tr><th>곡</th><th>아티스트</th><th>장르</th><th></th></tr></thead><tbody id="songRows"></tbody></table>
+          <div class="row-add">
+            <input class="input" id="so-title" placeholder="곡 제목" />
+            <input class="input" id="so-artist" placeholder="아티스트" />
+            <select class="input" id="so-genre">
+              <option>K-POP</option><option>발라드</option><option>인디</option><option>OST</option><option>기타</option>
+            </select>
+            <button class="btn sm" id="addSong">추가</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DRESS -->
+      <section class="tab-panel" id="tab-dress">
+        <div class="panel">
+          <h2>옷장</h2>
+          <p class="hint">이미지 주소를 넣으면 실제 이미지로 뜹니다(SOOP 이미지 주소, 3:4 권장). NEW 체크 시 새 옷 포스터로 노출.</p>
+          <table><thead><tr><th>이름</th><th>분류</th><th>NEW</th><th></th></tr></thead><tbody id="dressRows"></tbody></table>
+          <div class="row-add">
+            <input class="input" id="d-name" placeholder="이름 (예: 미드나잇 드레스)" />
+            <select class="input" id="d-cat"><option value="outfit">의상</option><option value="hair">헤어</option><option value="lens">렌즈</option></select>
+            <input class="input" id="d-img" placeholder="이미지 주소 (선택)" />
+            <label style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="d-new" style="width:auto" /> 새 옷(NEW)</label>
+            <button class="btn sm" id="addDress">추가</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORK (업보) -->
+      <section class="tab-panel" id="tab-work">
+        <div class="panel">
+          <h2>업보 — 종류</h2>
+          <p class="hint">일반 방셀 1개 + 이벤트 방셀들. 카테고리로 탭이 나뉩니다.</p>
+          <table><thead><tr><th>이름</th><th>구분</th><th></th></tr></thead><tbody id="typeRows"></tbody></table>
+          <div class="row-add">
+            <input class="input" id="t-name" placeholder="종류 이름 (예: 어린이날)" />
+            <select class="input" id="t-cat"><option value="일반">일반</option><option value="이벤트">이벤트</option></select>
+            <button class="btn sm" id="addType">추가</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>업보 — 시청자 & 횟수</h2>
+          <p class="hint">시청자를 추가하고, 종류별 방셀 횟수를 입력하세요(0은 표시 안 됨).</p>
+          <div id="viewerList"></div>
+          <div class="row-add">
+            <input class="input" id="v-nk" placeholder="닉네임" />
+            <input class="input" id="v-id" placeholder="SOOP 아이디 (프사용, 선택)" />
+            <button class="btn sm" id="addViewer">시청자 추가</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- THEME -->
+      <section class="tab-panel" id="tab-theme">
+        <div class="panel">
+          <h2>🎨 테마 색</h2>
+          <p class="hint">사이트 전체 색에 반영됩니다. 저장 후 새로고침하면 적용됩니다.</p>
+          <div class="pal">
+            <div class="sw"><input type="color" id="c-theme-main" /><div><label style="margin:0">포인트</label><input class="input" id="f-theme-main" style="width:110px" /></div></div>
+            <div class="sw"><input type="color" id="c-theme-main-deep" /><div><label style="margin:0">포인트(진함)</label><input class="input" id="f-theme-main-deep" style="width:110px" /></div></div>
+            <div class="sw"><input type="color" id="c-theme-bg" /><div><label style="margin:0">배경</label><input class="input" id="f-theme-bg" style="width:110px" /></div></div>
+            <div class="sw"><input type="color" id="c-theme-logo" /><div><label style="margin:0">로고/글자</label><input class="input" id="f-theme-logo" style="width:110px" /></div></div>
+          </div>
+          <div class="save-bar"><button class="btn" id="saveTheme">테마 저장</button><button class="btn ghost sm" id="resetTheme">기본값</button></div>
+        </div>
+      </section>
+
+      <!-- INQUIRY -->
+      <section class="tab-panel" id="tab-inquiry">
+        <div class="panel">
+          <h2>문의함</h2>
+          <p class="hint">사이트 문의 버튼으로 들어온 내용입니다(관리자만 열람).</p>
+          <table><thead><tr><th>내용</th><th>받은 시각</th><th></th></tr></thead><tbody id="inqRows"></tbody></table>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../supabase.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var THEME_DEFAULTS = {
+          "theme-main": "#ff40ad", "theme-main-deep": "#de169a",
+          "theme-bg": "#0d0911", "theme-logo": "#fffafe"
+        };
+        var PROFILE_KEYS = [
+          "info-name","info-reading","info-height","info-debut","info-birth",
+          "info-gender","info-agency","info-fandom","info-point","info-persona",
+          "quote","like-list","dislike-list","stats",
+          "link-soop","link-youtube","link-cafe","link-fancim"
+        ];
+        function toast(m) {
+          var t = document.getElementById("toast");
+          t.textContent = m; t.classList.add("show");
+          clearTimeout(window.__t); window.__t = setTimeout(function () { t.classList.remove("show"); }, 2200);
+        }
+        function esc(s) { return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+        /* ---- auth ---- */
+        async function refreshSession() {
+          if (!db) { document.getElementById("loginMsg").textContent = "DB 연결 실패 (supabase.js 확인)"; return; }
+          var s = await db.auth.getSession();
+          if (s.data && s.data.session) showApp(s.data.session.user);
+        }
+        function showApp(user) {
+          document.getElementById("login").style.display = "none";
+          document.getElementById("app").hidden = false;
+          document.getElementById("who").textContent = user.email || "";
+          loadAll();
+        }
+        document.getElementById("loginBtn").addEventListener("click", async function () {
+          var email = document.getElementById("email").value.trim();
+          var password = document.getElementById("pw").value;
+          var msg = document.getElementById("loginMsg");
+          msg.textContent = "로그인 중…";
+          var r = await db.auth.signInWithPassword({ email: email, password: password });
+          if (r.error) { msg.textContent = "로그인 실패: " + r.error.message; return; }
+          showApp(r.data.user);
+        });
+        document.getElementById("pw").addEventListener("keydown", function (e) {
+          if (e.key === "Enter") document.getElementById("loginBtn").click();
+        });
+        document.getElementById("logoutBtn").addEventListener("click", async function () {
+          await db.auth.signOut(); location.reload();
+        });
+
+        /* ---- tabs ---- */
+        document.querySelectorAll("#tabs button").forEach(function (b) {
+          b.addEventListener("click", function () {
+            document.querySelectorAll("#tabs button").forEach(function (x) { x.classList.toggle("on", x === b); });
+            document.querySelectorAll(".tab-panel").forEach(function (p) {
+              p.classList.toggle("on", p.id === "tab-" + b.dataset.tab);
+            });
+          });
+        });
+
+        /* ---- profile load/save ---- */
+        async function loadProfile() {
+          var data = {};
+          try { var r = await db.from("profile").select("data").eq("id", 1); if (r.data && r.data[0]) data = r.data[0].data || {}; } catch (e) {}
+          PROFILE_KEYS.forEach(function (k) {
+            var el = document.getElementById("f-" + k);
+            if (el) el.value = typeof data[k] === "string" ? data[k] : (data[k] == null ? "" : data[k]);
+          });
+          Object.keys(THEME_DEFAULTS).forEach(function (k) {
+            var v = data[k] || THEME_DEFAULTS[k];
+            var f = document.getElementById("f-" + k), c = document.getElementById("c-" + k);
+            if (f) f.value = v; if (c) c.value = /^#([0-9a-f]{6})$/i.test(v) ? v : "#000000";
+          });
+        }
+        async function saveProfilePartial(patch) {
+          var cur = {};
+          try { var r = await db.from("profile").select("data").eq("id", 1); if (r.data && r.data[0]) cur = r.data[0].data || {}; } catch (e) {}
+          var merged = Object.assign({}, cur, patch);
+          var up = await db.from("profile").update({ data: merged }).eq("id", 1);
+          if (up.error) { toast("저장 실패: " + up.error.message); return false; }
+          return true;
+        }
+        document.getElementById("saveProfile").addEventListener("click", async function () {
+          var patch = {};
+          PROFILE_KEYS.forEach(function (k) { var el = document.getElementById("f-" + k); if (el) patch[k] = el.value; });
+          if (await saveProfilePartial(patch)) toast("프로필 저장됨");
+        });
+
+        /* ---- theme ---- */
+        ["theme-main","theme-main-deep","theme-bg","theme-logo"].forEach(function (k) {
+          var c = document.getElementById("c-" + k), f = document.getElementById("f-" + k);
+          if (c && f) { c.addEventListener("input", function () { f.value = c.value; }); f.addEventListener("input", function () { if (/^#([0-9a-f]{6})$/i.test(f.value)) c.value = f.value; }); }
+        });
+        document.getElementById("saveTheme").addEventListener("click", async function () {
+          var patch = {};
+          Object.keys(THEME_DEFAULTS).forEach(function (k) { patch[k] = document.getElementById("f-" + k).value; });
+          if (await saveProfilePartial(patch)) toast("테마 저장됨");
+        });
+        document.getElementById("resetTheme").addEventListener("click", function () {
+          Object.keys(THEME_DEFAULTS).forEach(function (k) {
+            document.getElementById("f-" + k).value = THEME_DEFAULTS[k];
+            document.getElementById("c-" + k).value = THEME_DEFAULTS[k];
+          });
+        });
+
+        /* ---- schedule ---- */
+        async function loadSchedule() {
+          var rows = await fetchAll("schedule", { order: "date", asc: true });
+          document.getElementById("schedRows").innerHTML = rows.map(function (r) {
+            return "<tr><td>" + esc(r.date || "") + "</td><td>" + esc(r.title || "") + "</td><td>" + esc(r.time || "") +
+              '</td><td><button class="btn del sm" data-del-sched="' + r.id + '">삭제</button></td></tr>';
+          }).join("");
+        }
+        document.getElementById("addSched").addEventListener("click", async function () {
+          var date = document.getElementById("s-date").value, title = document.getElementById("s-title").value.trim();
+          if (!date || !title) { toast("날짜·제목을 입력하세요"); return; }
+          await insertRow("schedule", { date: date, title: title, time: document.getElementById("s-time").value.trim(), type: "특별" });
+          document.getElementById("s-title").value = ""; document.getElementById("s-time").value = "";
+          loadSchedule(); toast("추가됨");
+        });
+
+        /* ---- song ---- */
+        async function loadSong() {
+          var rows = await fetchAll("songs", { order: "created_at", asc: false });
+          document.getElementById("songRows").innerHTML = rows.map(function (r) {
+            return "<tr><td>" + esc(r.title || "") + "</td><td>" + esc(r.artist || "") + "</td><td>" + esc(r.genre || "") +
+              '</td><td><button class="btn del sm" data-del-song="' + r.id + '">삭제</button></td></tr>';
+          }).join("");
+        }
+        document.getElementById("addSong").addEventListener("click", async function () {
+          var title = document.getElementById("so-title").value.trim();
+          if (!title) { toast("곡 제목을 입력하세요"); return; }
+          await insertRow("songs", { title: title, artist: document.getElementById("so-artist").value.trim(), genre: document.getElementById("so-genre").value });
+          document.getElementById("so-title").value = ""; document.getElementById("so-artist").value = "";
+          loadSong(); toast("추가됨");
+        });
+
+        /* ---- dress ---- */
+        async function loadDress() {
+          var rows = await fetchAll("dress_items", { order: "sort_order", asc: true });
+          var CAT = { outfit: "의상", hair: "헤어", lens: "렌즈" };
+          document.getElementById("dressRows").innerHTML = rows.map(function (r) {
+            var bg = Array.isArray(r.badges) ? r.badges : [];
+            var isNew = bg.some(function (x) { return (x && (x.label || x)) === "NEW"; });
+            return "<tr><td>" + esc(r.name || "") + "</td><td>" + (CAT[r.category] || r.category) + "</td><td>" + (isNew ? "NEW" : "") +
+              '</td><td><button class="btn del sm" data-del-dress="' + r.id + '">삭제</button></td></tr>';
+          }).join("");
+        }
+        document.getElementById("addDress").addEventListener("click", async function () {
+          var name = document.getElementById("d-name").value.trim();
+          if (!name) { toast("이름을 입력하세요"); return; }
+          var badges = document.getElementById("d-new").checked ? [{ label: "NEW" }] : [];
+          await insertRow("dress_items", {
+            name: name, category: document.getElementById("d-cat").value,
+            image_url: document.getElementById("d-img").value.trim(), badges: badges
+          });
+          document.getElementById("d-name").value = ""; document.getElementById("d-img").value = ""; document.getElementById("d-new").checked = false;
+          loadDress(); toast("추가됨");
+        });
+
+        /* ---- work (viewers / types / counts) ---- */
+        var TYPES = [], VIEWERS = [], COUNTS = [];
+        async function loadWork() {
+          TYPES = await fetchAll("upbo_types", { order: "sort_order", asc: true });
+          VIEWERS = await fetchAll("viewers", { order: "sort_order", asc: true });
+          COUNTS = await fetchAll("upbo_counts", {});
+          document.getElementById("typeRows").innerHTML = TYPES.map(function (t) {
+            return "<tr><td>" + esc(t.name) + "</td><td>" + esc(t.category) + '</td><td><button class="btn del sm" data-del-type="' + t.id + '">삭제</button></td></tr>';
+          }).join("");
+          var cmap = {};
+          COUNTS.forEach(function (c) { cmap[c.viewer_id + "_" + c.type_id] = c.count; });
+          document.getElementById("viewerList").innerHTML = VIEWERS.map(function (v) {
+            var inputs = TYPES.map(function (t) {
+              var val = cmap[v.id + "_" + t.id] || 0;
+              return '<label style="margin:0;font-size:11px">' + esc(t.name) +
+                '<input class="input" style="padding:5px 7px" type="number" min="0" data-vc="' + v.id + "_" + t.id + '" value="' + val + '"></label>';
+            }).join("");
+            return '<div class="panel" style="padding:12px;margin-bottom:10px"><div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">' +
+              "<b>" + esc(v.nk || v.nickname) + "</b><span class=\"hint\" style=\"margin:0\">" + esc(v.soop_id || "") + "</span>" +
+              '<button class="btn del sm" data-del-viewer="' + v.id + '" style="margin-left:auto">삭제</button></div>' +
+              '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">' + inputs + "</div>" +
+              '<button class="btn sm" data-save-viewer="' + v.id + '" style="margin-top:8px">이 시청자 저장</button></div>';
+          }).join("") || '<p class="hint">시청자가 없습니다. 아래에서 추가하세요.</p>';
+        }
+        document.getElementById("addType").addEventListener("click", async function () {
+          var name = document.getElementById("t-name").value.trim();
+          if (!name) { toast("이름을 입력하세요"); return; }
+          await insertRow("upbo_types", { name: name, category: document.getElementById("t-cat").value });
+          document.getElementById("t-name").value = ""; loadWork(); toast("추가됨");
+        });
+        document.getElementById("addViewer").addEventListener("click", async function () {
+          var nk = document.getElementById("v-nk").value.trim();
+          if (!nk) { toast("닉네임을 입력하세요"); return; }
+          await insertRow("viewers", { nickname: nk, soop_id: document.getElementById("v-id").value.trim() });
+          document.getElementById("v-nk").value = ""; document.getElementById("v-id").value = ""; loadWork(); toast("추가됨");
+        });
+
+        /* ---- inquiries ---- */
+        async function loadInquiry() {
+          var rows = await fetchAll("inquiries", { order: "created_at", asc: false });
+          document.getElementById("inqRows").innerHTML = rows.map(function (r) {
+            var when = r.created_at ? new Date(r.created_at).toLocaleString("ko-KR") : "";
+            return "<tr><td>" + esc(r.message || "") + "</td><td>" + esc(when) + '</td><td><button class="btn del sm" data-del-inq="' + r.id + '">삭제</button></td></tr>';
+          }).join("") || '<tr><td colspan="3" class="hint">받은 문의가 없습니다.</td></tr>';
+        }
+
+        /* ---- delegated clicks (delete / save viewer counts) ---- */
+        document.getElementById("app").addEventListener("click", async function (e) {
+          var t = e.target;
+          async function del(table, id, reload) { if (confirm("삭제할까요?")) { await deleteRow(table, id); reload(); toast("삭제됨"); } }
+          if (t.dataset.delSched) return del("schedule", t.dataset.delSched, loadSchedule);
+          if (t.dataset.delSong) return del("songs", t.dataset.delSong, loadSong);
+          if (t.dataset.delDress) return del("dress_items", t.dataset.delDress, loadDress);
+          if (t.dataset.delType) return del("upbo_types", t.dataset.delType, loadWork);
+          if (t.dataset.delViewer) return del("viewers", t.dataset.delViewer, loadWork);
+          if (t.dataset.delInq) return del("inquiries", t.dataset.delInq, loadInquiry);
+          if (t.dataset.saveViewer) {
+            var vid = t.dataset.saveViewer;
+            var inputs = document.querySelectorAll('[data-vc^="' + vid + '_"]');
+            for (var i = 0; i < inputs.length; i++) {
+              var parts = inputs[i].dataset.vc.split("_");
+              var tid = parts[1], val = parseInt(inputs[i].value) || 0;
+              await db.from("upbo_counts").upsert({ viewer_id: +vid, type_id: +tid, count: val }, { onConflict: "viewer_id,type_id" });
+            }
+            toast("저장됨"); loadWork();
+          }
+        });
+
+        function loadAll() { loadProfile(); loadSchedule(); loadSong(); loadDress(); loadWork(); loadInquiry(); }
+        refreshSession();
+      })();
+    </script>
+  </body>
+</html>

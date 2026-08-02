@@ -321,6 +321,20 @@
         });
         qEl.addEventListener("input", render);
         render();
+        (async function () {
+          try {
+            if (typeof db !== "undefined" && db && typeof fetchAll === "function") {
+              var rows = await fetchAll("songs", { order: "created_at", asc: false });
+              if (rows && rows.length) {
+                SONGS = rows.map(function (r) {
+                  return { t: r.title || "", a: r.artist || "", g: r.genre || "기타" };
+                });
+                render();
+              }
+            }
+          } catch (e) {}
+          document.body.classList.add("ready");
+        })();
       })();
     </script>
   </body>

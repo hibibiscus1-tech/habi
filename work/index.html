@@ -402,6 +402,36 @@
         });
 
         render();
+        (async function () {
+          try {
+            if (typeof db !== "undefined" && db && typeof fetchAll === "function") {
+              var vs = await fetchAll("viewers", { order: "sort_order", asc: true });
+              if (vs && vs.length) {
+                var types = await fetchAll("upbo_types", { order: "sort_order", asc: true });
+                var counts = await fetchAll("upbo_counts", {});
+                var typeById = {}, normalName = "일반", evNames = [];
+                (types || []).forEach(function (t) {
+                  typeById[t.id] = t.name;
+                  if (t.category === "일반") normalName = t.name;
+                  else evNames.push(t.name);
+                });
+                var byV = {};
+                (counts || []).forEach(function (c) {
+                  var tn = typeById[c.type_id];
+                  if (!tn) return;
+                  (byV[c.viewer_id] = byV[c.viewer_id] || {})[tn] = c.count;
+                });
+                NORMAL = normalName;
+                EVENTS = evNames;
+                VIEWERS = vs.map(function (v) {
+                  return { nk: v.nickname || "", id: v.soop_id || "", c: byV[v.id] || {} };
+                });
+                render();
+              }
+            }
+          } catch (e) {}
+          document.body.classList.add("ready");
+        })();
       })();
     </script>
   </body>

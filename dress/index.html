@@ -348,6 +348,29 @@
           document.getElementById("lb").classList.add("open");
         });
         render();
+        (async function () {
+          try {
+            if (typeof db !== "undefined" && db && typeof fetchAll === "function") {
+              var rows = await fetchAll("dress_items", { order: "sort_order", asc: true });
+              if (rows && rows.length) {
+                var hueMap = { outfit: 322, hair: 300, lens: 330 };
+                LOOKS = rows.map(function (r) {
+                  var bg = Array.isArray(r.badges) ? r.badges : [];
+                  var isNew = bg.some(function (b) { return (b && (b.label || b)) === "NEW"; });
+                  return {
+                    c: r.category || "outfit",
+                    t: r.name || "",
+                    d: String(r.created_at || "").slice(0, 10).replace(/-/g, "."),
+                    hue: hueMap[r.category] || 322,
+                    isNew: isNew
+                  };
+                });
+                render();
+              }
+            }
+          } catch (e) {}
+          document.body.classList.add("ready");
+        })();
       })();
     </script>
   </body>

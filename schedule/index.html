@@ -463,6 +463,24 @@
           renderMonth();
         });
         renderMonth();
+        (async function () {
+          try {
+            if (typeof db !== "undefined" && db && typeof fetchAll === "function") {
+              var rows = await fetchAll("schedule", { order: "date", asc: true });
+              if (rows && rows.length) {
+                EVENTS = {};
+                rows.forEach(function (r) {
+                  if (!r.date) return;
+                  var dt = new Date(r.date + "T00:00:00");
+                  if (isNaN(dt)) return;
+                  EVENTS[dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDate()] = r.title || "";
+                });
+                renderMonth();
+              }
+            }
+          } catch (e) {}
+          document.body.classList.add("ready");
+        })();
       })();
     </script>
   </body>

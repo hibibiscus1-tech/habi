@@ -105,7 +105,9 @@
     });
   }
 
-  /* ---- ready (FOUC release) ---- */
-  requestAnimationFrame(() => body.classList.add("ready"));
+  /* ---- ready (FOUC release) ----
+     Loaders call body.classList.add('ready') after data is applied, so the page
+     never shows defaults then swaps. This timeout is only a fallback so a dead DB
+     can't hide the page forever. */
   setTimeout(() => body.classList.add("ready"), 1200);
 })();

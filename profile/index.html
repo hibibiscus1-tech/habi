@@ -227,7 +227,7 @@
           <span class="kicker">FILM 01 · 대~따 / 154</span>
           <h2 class="p-name">하비<em>:b</em></h2>
           <p class="p-read">HABI · 하비</p>
-          <p class="p-quote">"대~따 즐거운 하비의 밤!"</p>
+          <p class="p-quote" id="quote">"대~따 즐거운 하비의 밤!"</p>
           <p class="p-mini">
             키 154 · 데뷔 2025.02.22 · 생일 <b id="bday">01.12 (D-)</b>
           </p>
@@ -240,16 +240,16 @@
         <section class="panel">
           <div class="panel-h"><h2>DOSSIER</h2><span class="tag">프로필 정보</span></div>
           <dl class="deflist grid2">
-            <div><dt>NAME</dt><dd>하비:b / 하비</dd></div>
-            <div><dt>READING</dt><dd>하비 / HABI</dd></div>
-            <div><dt>HEIGHT</dt><dd>154</dd></div>
-            <div><dt>DEBUT</dt><dd>2025. 02. 22</dd></div>
-            <div><dt>BIRTHDAY</dt><dd>01. 12</dd></div>
-            <div><dt>GENDER</dt><dd>여</dd></div>
-            <div><dt>AGENCY</dt><dd>개인세</dd></div>
-            <div><dt>FAN NAME</dt><dd>찌꺼기</dd></div>
-            <div><dt>POINT</dt><dd>좌측 눈 아래 점</dd></div>
-            <div><dt>PERSONA</dt><dd>금쪽이</dd></div>
+            <div><dt>NAME</dt><dd id="info-name">하비:b / 하비</dd></div>
+            <div><dt>READING</dt><dd id="info-reading">하비 / HABI</dd></div>
+            <div><dt>HEIGHT</dt><dd id="info-height">154</dd></div>
+            <div><dt>DEBUT</dt><dd id="info-debut">2025. 02. 22</dd></div>
+            <div><dt>BIRTHDAY</dt><dd id="info-birth">01. 12</dd></div>
+            <div><dt>GENDER</dt><dd id="info-gender">여</dd></div>
+            <div><dt>AGENCY</dt><dd id="info-agency">개인세</dd></div>
+            <div><dt>FAN NAME</dt><dd id="info-fandom">찌꺼기</dd></div>
+            <div><dt>POINT</dt><dd id="info-point">좌측 눈 아래 점</dd></div>
+            <div><dt>PERSONA</dt><dd id="info-persona">금쪽이</dd></div>
           </dl>
         </section>
 
@@ -282,7 +282,7 @@
             <p class="hint" style="margin: 18px 0 8px; letter-spacing: 0.16em">
               STATS
             </p>
-            <ul class="stat">
+            <ul class="stat" id="stats">
               <li><span>금쪽력</span><div class="bar"><i style="width: 96%"></i></div><b>96</b></li>
               <li><span>단것사랑</span><div class="bar"><i style="width: 92%"></i></div><b>92</b></li>
               <li><span>겜 승부욕</span><div class="bar"><i style="width: 78%"></i></div><b>78</b></li>
@@ -296,7 +296,7 @@
           <div class="pn">
             <div class="like">
               <h3><i></i>LIKE</h3>
-              <div class="chips">
+              <div class="chips" id="like-list">
                 <span class="chip">콜라</span>
                 <span class="chip">군것질</span>
                 <span class="chip">단거</span>
@@ -305,7 +305,7 @@
             </div>
             <div class="dislike">
               <h3><i></i>DISLIKE</h3>
-              <div class="chips">
+              <div class="chips" id="dislike-list">
                 <span class="chip">운동</span>
                 <span class="chip">야외활동</span>
               </div>
@@ -338,10 +338,10 @@
         <section class="panel">
           <div class="panel-h"><h2>LINKS</h2><span class="tag">관련 링크</span></div>
           <div class="linkrow">
-            <a href="https://www.sooplive.com/station/hibibi1" target="_blank" rel="noreferrer">SOOP <span>↗</span></a>
-            <a href="https://www.youtube.com/@hibibiscus" target="_blank" rel="noreferrer">YOUTUBE <span>↗</span></a>
-            <a href="https://cafe.naver.com/gimibi" target="_blank" rel="noreferrer">CAFE <span>↗</span></a>
-            <a href="https://fancim.me/celeb/profile.aspx?url=324183" target="_blank" rel="noreferrer">FANCIM <span>↗</span></a>
+            <a id="link-soop" href="https://www.sooplive.com/station/hibibi1" target="_blank" rel="noreferrer">SOOP <span>↗</span></a>
+            <a id="link-youtube" href="https://www.youtube.com/@hibibiscus" target="_blank" rel="noreferrer">YOUTUBE <span>↗</span></a>
+            <a id="link-cafe" href="https://cafe.naver.com/gimibi" target="_blank" rel="noreferrer">CAFE <span>↗</span></a>
+            <a id="link-fancim" href="https://fancim.me/celeb/profile.aspx?url=324183" target="_blank" rel="noreferrer">FANCIM <span>↗</span></a>
           </div>
         </section>
       </div>
@@ -376,6 +376,76 @@
     <script src="../supabase.js"></script>
     <script src="../site.js"></script>
     <script src="../fx.js"></script>
+    <script>
+      (function () {
+        var esc = function (s) {
+          return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        };
+        var defaults = {
+          "info-name": "하비:b / 하비", "info-reading": "하비 / HABI", "info-height": "154",
+          "info-debut": "2025. 02. 22", "info-birth": "01. 12", "info-gender": "여",
+          "info-agency": "개인세", "info-fandom": "찌꺼기", "info-point": "좌측 눈 아래 점", "info-persona": "금쪽이",
+          quote: "대~따 즐거운 하비의 밤!",
+          "like-list": "콜라,군것질,단거,★꺼기><★", "dislike-list": "운동,야외활동",
+          stats: "금쪽력:96\n단것사랑:92\n겜 승부욕:78\n노래욕심:64",
+          "link-soop": "https://www.sooplive.com/station/hibibi1",
+          "link-youtube": "https://www.youtube.com/@hibibiscus",
+          "link-cafe": "https://cafe.naver.com/gimibi",
+          "link-fancim": "https://fancim.me/celeb/profile.aspx?url=324183"
+        };
+        function renderChips(id, v) {
+          var el = document.getElementById(id); if (!el) return;
+          var arr = Array.isArray(v) ? v : String(v || "").split(",");
+          el.innerHTML = arr.map(function (x) { return String(x).trim(); }).filter(Boolean)
+            .map(function (x) { return '<span class="chip">' + esc(x) + "</span>"; }).join("");
+        }
+        function renderStats(v) {
+          var el = document.getElementById("stats"); if (!el) return;
+          var lines = typeof v === "string" ? v.split("\n") : (Array.isArray(v) ? v : []);
+          el.innerHTML = lines.map(function (l) {
+            var s = typeof l === "string" ? l : (l && l.name ? l.name + ":" + l.value : "");
+            var p = s.split(":"), name = p[0], num = p[1];
+            if (!name || isNaN(parseInt(num))) return "";
+            var pct = Math.max(0, Math.min(100, parseInt(num)));
+            return "<li><span>" + esc(name.trim()) + '</span><div class="bar"><i style="width:' + pct + '%"></i></div><b>' + pct + "</b></li>";
+          }).join("");
+        }
+        function ddayMMDD(s) {
+          var m = String(s || "").match(/(\d{1,2})[.\-\/ ]+(\d{1,2})/);
+          return m ? ("0" + m[1]).slice(-2) + "-" + ("0" + m[2]).slice(-2) : "";
+        }
+        async function loadProfile() {
+          var saved = {};
+          try {
+            var r = await db.from("profile").select("data").eq("id", 1);
+            if (r.data && r.data[0] && r.data[0].data) saved = r.data[0].data;
+          } catch (e) {}
+          var d = Object.assign({}, defaults, saved);
+          ["info-name","info-reading","info-height","info-debut","info-birth","info-gender","info-agency","info-fandom","info-point","info-persona"].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el && typeof d[id] === "string") el.textContent = d[id];
+          });
+          var q = document.getElementById("quote");
+          if (q && typeof d.quote === "string") q.innerHTML = '"' + esc(d.quote).replace(/\n/g, "<br>") + '"';
+          renderChips("like-list", d["like-list"]);
+          renderChips("dislike-list", d["dislike-list"]);
+          renderStats(d.stats);
+          ["link-soop","link-youtube","link-cafe","link-fancim"].forEach(function (k) {
+            var a = document.getElementById(k);
+            if (a && d[k]) a.href = d[k];
+          });
+          var mmdd = ddayMMDD(d["info-birth"]);
+          var bd = document.getElementById("bday");
+          if (bd && typeof fxDday === "function" && mmdd) {
+            var n = fxDday(mmdd);
+            if (n !== null) bd.textContent = d["info-birth"] + " " + (n === 0 ? "(생일 🎉)" : "(D-" + n + ")");
+          }
+          document.body.classList.add("ready");
+        }
+        if (typeof db !== "undefined" && db) loadProfile();
+        else document.body.classList.add("ready");
+      })();
+    </script>
     <script>
       (function () {
         var b = document.getElementById("bday");

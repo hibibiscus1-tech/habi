@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1180, user-scalable=yes" />
+    <meta name="theme-color" content="#0d0911" />
+    <meta name="description" content="HABI OFFICIAL — 하비 업보 (방셀 기록)" />
+    <title>하비 HABI · LEDGER</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    />
+    <link rel="stylesheet" href="../site.css" />
+    <script src="../pcview.js"></script>
+    <style>
+      .lg-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .vgrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .vcard {
+        position: relative;
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+        padding: 20px 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        cursor: pointer;
+        text-align: center;
+        transition: border-color 0.2s ease, transform 0.15s ease;
+      }
+      .vcard:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .av {
+        position: relative;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        background: linear-gradient(150deg, var(--accent-deep), var(--accent));
+        display: grid;
+        place-items: center;
+      }
+      .av span {
+        color: #fff;
+        font-family: var(--display-font);
+        font-size: 22px;
+        font-weight: 950;
+      }
+      .av img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .vcard .nk {
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+      .vcard .id {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .vcard .badge {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 3px;
+        margin-top: 2px;
+        padding: 4px 11px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+      }
+      .vcard .badge b {
+        font-family: var(--display-font);
+        font-size: 14px;
+      }
+      /* modal breakdown */
+      .vm-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .vm-head .av {
+        width: 54px;
+        height: 54px;
+      }
+      .vm-head .nk {
+        font-family: var(--display-font);
+        font-size: 22px;
+        font-weight: 950;
+      }
+      .vm-head .id {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .brk {
+        display: grid;
+        gap: 0;
+      }
+      .brk > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 2px;
+        border-top: 1px solid var(--line);
+      }
+      .brk .k {
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .brk .ev {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .brk .ev::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        content: "";
+      }
+      .brk .v {
+        color: var(--accent);
+        font-family: var(--display-font);
+        font-size: 16px;
+        font-weight: 950;
+      }
+      .brk .total {
+        margin-top: 8px;
+        border-top: 1px solid var(--line-strong);
+      }
+      .brk .total .k {
+        letter-spacing: 0.08em;
+      }
+      @media (max-width: 720px) {
+        .vgrid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light");
+      try{if(window.self!==window.top)document.body.classList.add('embed');}catch(e){document.body.classList.add('embed');}
+    </script>
+
+    <nav class="nav">
+      <a class="nav-logo" href="../index.html">HABI<em>:B</em></a>
+      <div class="nav-menu">
+        <a href="../index.html">메인</a>
+        <a href="../profile/">프로필</a>
+        <a href="../schedule/">일정</a>
+        <a href="../song/">노래책</a>
+        <a href="../dress/">옷장</a>
+        <a href="../work/" class="on">업보</a>
+      </div>
+      <div class="nav-tools">
+        <a class="open-full" href="?pc=1" target="_blank" rel="noreferrer">PC 화면 ↗</a>
+        <button class="ask-btn" data-open="askMask">문의</button>
+        <button class="icon-btn" data-theme-toggle></button>
+        <button class="nav-burger" aria-label="메뉴"><span></span></button>
+      </div>
+    </nav>
+
+    <main class="wrap">
+      <header class="reel">
+        <div class="reel-no" aria-hidden="true">05</div>
+        <span class="kicker">REEL 05 — LEDGER</span>
+        <h1>업보</h1>
+        <p class="reel-sub">방셀을 받아 간 찌꺼기들의 기록. 카드를 누르면 종류별 횟수를 볼 수 있어요.</p>
+      </header>
+
+      <div class="filmstrip"></div>
+
+      <section class="panel">
+        <div class="lg-top">
+          <div class="seg">
+            <button class="on" data-tab="normal">일반 방셀</button>
+            <button data-tab="event">이벤트 방셀</button>
+          </div>
+          <div class="search">
+            <input id="q" type="search" placeholder="닉네임 · 계정 검색" />
+          </div>
+        </div>
+        <div class="count" id="count" style="margin-bottom: 14px"></div>
+        <div class="vgrid" id="grid"></div>
+        <div class="empty hide" id="empty"><b>NO REEL</b>기록이 없어요.</div>
+      </section>
+
+      <div class="marquee">
+        <span>업보 <b>·</b> LEDGER <b>·</b> 찌꺼기 <b>·</b> 방셀 기록 <b>·</b> 업보 <b>·</b> LEDGER <b>·</b> 찌꺼기 <b>·</b> 방셀 기록 <b>·</b> </span>
+      </div>
+
+      <footer>
+        <span class="fmark">HABI :B</span>
+        © 2026 HABI OFFICIAL.<br />
+        비즈니스 문의 — 상단 문의 버튼을 이용해 주세요.
+      </footer>
+    </main>
+
+    <div class="mask" id="vm">
+      <div class="modal">
+        <button class="modal-x" data-close aria-label="닫기">×</button>
+        <span class="kicker">LEDGER</span>
+        <div class="vm-head" style="margin-top: 8px">
+          <div class="av" id="vmAv"></div>
+          <div>
+            <div class="nk" id="vmNk"></div>
+            <div class="id" id="vmId"></div>
+          </div>
+        </div>
+        <div class="brk" id="vmBrk"></div>
+      </div>
+    </div>
+
+    <div class="mask" id="askMask">
+      <div class="modal" id="askForm">
+        <button class="modal-x" data-close aria-label="닫기">×</button>
+        <span class="kicker">CONTACT</span>
+        <h3>문의하기</h3>
+        <div class="field">
+          <label>내용</label>
+          <textarea class="input" id="askText" placeholder="문의 내용을 입력하세요"></textarea>
+          <p class="hint">남긴 내용은 관리자만 확인합니다.</p>
+        </div>
+        <button class="btn" data-send>보내기</button>
+      </div>
+    </div>
+
+    <div id="fx" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../supabase.js"></script>
+    <script src="../site.js"></script>
+    <script src="../fx.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        /* Sample ledger. counts keyed by type; 0/absent hidden in modal.
+           NORMAL is the general 방셀; the rest are event 방셀. Replace via import. */
+        var NORMAL = "일반";
+        var EVENTS = ["어린이날", "여름 수영복", "크리스마스", "할로윈"];
+        var VIEWERS = [
+          { nk: "찌꺼기대장", id: "habilove1", c: { 일반: 5, "여름 수영복": 2, 크리스마스: 1 } },
+          { nk: "밤톨", id: "nighttol", c: { 일반: 3, 어린이날: 1 } },
+          { nk: "콜라단지", id: "cola_jar", c: { 일반: 8, 할로윈: 2, 크리스마스: 1 } },
+          { nk: "단거요정", id: "sweetfae", c: { 일반: 2 } },
+          { nk: "하비팬1호", id: "habifan01", c: { 일반: 6, 어린이날: 1, "여름 수영복": 1 } },
+          { nk: "야식마왕", id: "latenite", c: { 할로윈: 3, 크리스마스: 2 } },
+          { nk: "군것질러", id: "snackrun", c: { 일반: 4, "여름 수영복": 1 } },
+          { nk: "점찍는사람", id: "moledot", c: { 일반: 1, 어린이날: 2 } },
+          { nk: "필름감독", id: "reeldir", c: { 일반: 7, 할로윈: 1 } },
+          { nk: "말랑벚꽃", id: "sakura_soft", c: { "여름 수영복": 3, 크리스마스: 1 } },
+        ];
+
+        function av(v, big) {
+          var two = v.id.slice(0, 2);
+          var url =
+            "https://profile.img.sooplive.co.kr/LOGO/" +
+            two +
+            "/" +
+            v.id +
+            "/" +
+            v.id +
+            ".jpg";
+          return (
+            '<span>' +
+            v.nk.slice(0, 1) +
+            '</span><img referrerpolicy="no-referrer" src="' +
+            url +
+            '" alt="" onerror="this.style.display=\'none\'">'
+          );
+        }
+        function total(v, kind) {
+          var s = 0;
+          for (var k in v.c) {
+            if (kind === "normal" && k !== NORMAL) continue;
+            if (kind === "event" && k === NORMAL) continue;
+            s += v.c[k];
+          }
+          return s;
+        }
+
+        var grid = document.getElementById("grid");
+        var empty = document.getElementById("empty");
+        var count = document.getElementById("count");
+        var qEl = document.getElementById("q");
+        var segs = document.querySelectorAll("[data-tab]");
+        var tab = "normal";
+
+        function render() {
+          var q = (qEl.value || "").trim().toLowerCase();
+          var rows = VIEWERS.filter(function (v) {
+            var okT = total(v, tab) > 0;
+            var okQ =
+              !q ||
+              v.nk.toLowerCase().indexOf(q) > -1 ||
+              v.id.toLowerCase().indexOf(q) > -1;
+            return okT && okQ;
+          }).sort(function (a, b) {
+            return total(b, tab) - total(a, tab);
+          });
+          count.textContent = rows.length + " 명";
+          empty.classList.toggle("hide", rows.length > 0);
+          grid.innerHTML = rows
+            .map(function (v) {
+              return (
+                '<div class="vcard" data-id="' +
+                v.id +
+                '"><div class="av">' +
+                av(v) +
+                '</div><div class="nk">' +
+                v.nk +
+                '</div><div class="id">@' +
+                v.id +
+                '</div><div class="badge"><b>' +
+                total(v, tab) +
+                "</b> 방셀</div></div>"
+              );
+            })
+            .join("");
+        }
+        segs.forEach(function (b) {
+          b.addEventListener("click", function () {
+            tab = b.dataset.tab;
+            segs.forEach(function (x) {
+              x.classList.toggle("on", x === b);
+            });
+            render();
+          });
+        });
+        qEl.addEventListener("input", render);
+
+        grid.addEventListener("click", function (e) {
+          var el = e.target.closest(".vcard");
+          if (!el) return;
+          var v = VIEWERS.find(function (x) {
+            return x.id === el.dataset.id;
+          });
+          document.getElementById("vmAv").innerHTML = av(v);
+          document.getElementById("vmNk").textContent = v.nk;
+          document.getElementById("vmId").textContent = "@" + v.id;
+          var order = [NORMAL].concat(EVENTS);
+          var sum = 0;
+          var rows = order
+            .filter(function (k) {
+              return v.c[k] > 0;
+            })
+            .map(function (k) {
+              sum += v.c[k];
+              return (
+                '<div><span class="k ev">' +
+                k +
+                '</span><span class="v">×' +
+                v.c[k] +
+                "</span></div>"
+              );
+            });
+          rows.push(
+            '<div class="total"><span class="k">TOTAL</span><span class="v">' +
+              sum +
+              "</span></div>",
+          );
+          document.getElementById("vmBrk").innerHTML = rows.join("");
+          window.__placeMask && window.__placeMask(document.getElementById("vm"));
+          document.getElementById("vm").classList.add("open");
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>

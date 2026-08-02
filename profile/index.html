@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1180, user-scalable=yes" />
+    <meta name="theme-color" content="#0d0911" />
+    <meta name="description" content="HABI OFFICIAL — 하비 프로필" />
+    <meta property="og:title" content="하비 HABI · PROFILE" />
+    <meta property="og:description" content="HABI OFFICIAL" />
+    <title>하비 HABI · PROFILE</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    />
+    <link rel="stylesheet" href="../site.css" />
+    <script src="../pcview.js"></script>
+    <style>
+      .p-hero {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: clamp(20px, 3vw, 40px);
+        align-items: end;
+        margin: 26px 0 8px;
+      }
+      .p-portrait {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: var(--bg-2);
+      }
+      .p-portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 52% 40%;
+      }
+      .p-portrait figcaption {
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        color: #fffafe;
+        font-family: var(--display-font);
+        font-size: 11px;
+        font-weight: 950;
+        letter-spacing: 0.2em;
+        text-shadow: 0 1px 8px rgb(0 0 0 / 60%);
+      }
+      .p-name {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 12px;
+        font-family: var(--display-font);
+        font-size: clamp(52px, 9vw, 104px);
+        font-weight: 950;
+        line-height: 0.82;
+        letter-spacing: -0.06em;
+      }
+      .p-name em {
+        font-family: var(--body-font);
+        font-size: 0.3em;
+        font-style: normal;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+      }
+      .p-read {
+        margin-top: 14px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.28em;
+      }
+      .p-quote {
+        margin-top: 10px;
+        color: var(--muted-strong);
+        font-size: clamp(16px, 2vw, 20px);
+        font-weight: 700;
+      }
+      .p-mini {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .p-mini b {
+        color: var(--accent);
+      }
+      /* stat bars */
+      .stat {
+        display: grid;
+        gap: 13px;
+      }
+      .stat li {
+        display: grid;
+        grid-template-columns: 92px 1fr auto;
+        gap: 12px;
+        align-items: center;
+      }
+      .stat span {
+        color: var(--muted-strong);
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .stat .bar {
+        height: 7px;
+        border-radius: 999px;
+        background: var(--panel-3);
+        overflow: hidden;
+      }
+      .stat .bar i {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+      }
+      .stat b {
+        color: var(--accent);
+        font-family: var(--display-font);
+        font-size: 13px;
+      }
+      .linkrow {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .linkrow a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 17px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+      .linkrow a:hover {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+      .linkrow a span {
+        color: var(--accent);
+      }
+      .jump {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 14px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+      }
+      @media (max-width: 640px) {
+        .p-hero {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+        .p-portrait {
+          max-width: 240px;
+        }
+        .linkrow {
+          grid-template-columns: 1fr;
+        }
+        .stat li {
+          grid-template-columns: 78px 1fr auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light");
+      try{if(window.self!==window.top)document.body.classList.add('embed');}catch(e){document.body.classList.add('embed');}
+    </script>
+
+    <nav class="nav">
+      <a class="nav-logo" href="../index.html">HABI<em>:B</em></a>
+      <div class="nav-menu">
+        <a href="../index.html">메인</a>
+        <a href="../profile/" class="on">프로필</a>
+        <a href="../schedule/">일정</a>
+        <a href="../song/">노래책</a>
+        <a href="../dress/">옷장</a>
+        <a href="../work/">업보</a>
+      </div>
+      <div class="nav-tools">
+        <a class="open-full" href="?pc=1" target="_blank" rel="noreferrer">PC 화면 ↗</a>
+        <button class="ask-btn" data-open="askMask">문의</button>
+        <button class="icon-btn" data-theme-toggle></button>
+        <button class="nav-burger" aria-label="메뉴"><span></span></button>
+      </div>
+    </nav>
+
+    <main class="wrap">
+      <header class="reel">
+        <div class="reel-no" aria-hidden="true">01</div>
+        <span class="kicker">REEL 01 — PROFILE</span>
+        <h1>PROFILE</h1>
+        <p class="reel-sub">하비 · HABI 도시에. 검은 고양이처럼 장난스럽고 벚꽃처럼 말랑한 밤의 필름.</p>
+      </header>
+
+      <section class="p-hero">
+        <figure class="p-portrait">
+          <img src="../assets/habi-cover.webp" alt="하비 대표 이미지" />
+          <figcaption>HABI :B</figcaption>
+        </figure>
+        <div>
+          <span class="kicker">FILM 01 · 대~따 / 154</span>
+          <h2 class="p-name">하비<em>:b</em></h2>
+          <p class="p-read">HABI · 하비</p>
+          <p class="p-quote">"대~따 즐거운 하비의 밤!"</p>
+          <p class="p-mini">
+            키 154 · 데뷔 2025.02.22 · 생일 <b id="bday">01.12 (D-)</b>
+          </p>
+        </div>
+      </section>
+
+      <div class="filmstrip"></div>
+
+      <div class="stack">
+        <section class="panel">
+          <div class="panel-h"><h2>DOSSIER</h2><span class="tag">프로필 정보</span></div>
+          <dl class="deflist grid2">
+            <div><dt>NAME</dt><dd>하비:b / 하비</dd></div>
+            <div><dt>READING</dt><dd>하비 / HABI</dd></div>
+            <div><dt>HEIGHT</dt><dd>154</dd></div>
+            <div><dt>DEBUT</dt><dd>2025. 02. 22</dd></div>
+            <div><dt>BIRTHDAY</dt><dd>01. 12</dd></div>
+            <div><dt>GENDER</dt><dd>여</dd></div>
+            <div><dt>AGENCY</dt><dd>개인세</dd></div>
+            <div><dt>FAN NAME</dt><dd>찌꺼기</dd></div>
+            <div><dt>POINT</dt><dd>좌측 눈 아래 점</dd></div>
+            <div><dt>PERSONA</dt><dd>금쪽이</dd></div>
+          </dl>
+        </section>
+
+        <div class="grid-2">
+          <section class="panel">
+            <div class="panel-h"><h2>CONTENT</h2><span class="tag">방송 키워드</span></div>
+            <div class="chips" style="margin-bottom: 16px">
+              <span class="chip accent">게임</span>
+              <span class="chip accent">저챗</span>
+              <span class="chip accent">노래</span>
+              <span class="chip accent">그림</span>
+            </div>
+            <p class="hint" style="margin-bottom: 8px; letter-spacing: 0.16em">
+              GAMES
+            </p>
+            <div class="chips">
+              <span class="chip">마인크래프트</span>
+              <span class="chip">배틀그라운드</span>
+              <span class="chip">서든어택</span>
+              <span class="chip">스팀 종합게임</span>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-h"><h2>MOTIF</h2><span class="tag">모티프</span></div>
+            <div class="chips">
+              <span class="chip accent">♡ 하트</span>
+              <span class="chip accent">✿ 꽃</span>
+            </div>
+            <p class="hint" style="margin: 18px 0 8px; letter-spacing: 0.16em">
+              STATS
+            </p>
+            <ul class="stat">
+              <li><span>금쪽력</span><div class="bar"><i style="width: 96%"></i></div><b>96</b></li>
+              <li><span>단것사랑</span><div class="bar"><i style="width: 92%"></i></div><b>92</b></li>
+              <li><span>겜 승부욕</span><div class="bar"><i style="width: 78%"></i></div><b>78</b></li>
+              <li><span>노래욕심</span><div class="bar"><i style="width: 64%"></i></div><b>64</b></li>
+            </ul>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-h"><h2>TASTE</h2><span class="tag">좋아 · 싫어</span></div>
+          <div class="pn">
+            <div class="like">
+              <h3><i></i>LIKE</h3>
+              <div class="chips">
+                <span class="chip">콜라</span>
+                <span class="chip">군것질</span>
+                <span class="chip">단거</span>
+                <span class="chip">★꺼기&gt;&lt;★</span>
+              </div>
+            </div>
+            <div class="dislike">
+              <h3><i></i>DISLIKE</h3>
+              <div class="chips">
+                <span class="chip">운동</span>
+                <span class="chip">야외활동</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid-2">
+          <section class="panel">
+            <div class="panel-h"><h2>SOUND</h2><span class="tag">노래</span></div>
+            <dl class="deflist">
+              <div><dt>SINGING</dt><dd>가끔 함</dd></div>
+              <div><dt>SIGNATURE</dt><dd>안예은 — 난파</dd></div>
+              <div><dt>GENRE</dt><dd>K-POP · 발라드 · 인디</dd></div>
+              <div><dt>AVOID</dt><dd>애교송</dd></div>
+            </dl>
+            <a class="jump" href="../song/">노래책 보기 <span>↗</span></a>
+          </section>
+
+          <section class="panel">
+            <div class="panel-h"><h2>ON AIR</h2><span class="tag">방송 일정</span></div>
+            <dl class="deflist">
+              <div><dt>WEEKLY</dt><dd>매일 18:00</dd></div>
+              <div><dt>OFF</dt><dd>주 1회 유동 휴방</dd></div>
+            </dl>
+            <a class="jump" href="../schedule/">전체 일정 보기 <span>↗</span></a>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-h"><h2>LINKS</h2><span class="tag">관련 링크</span></div>
+          <div class="linkrow">
+            <a href="https://www.sooplive.com/station/hibibi1" target="_blank" rel="noreferrer">SOOP <span>↗</span></a>
+            <a href="https://www.youtube.com/@hibibiscus" target="_blank" rel="noreferrer">YOUTUBE <span>↗</span></a>
+            <a href="https://cafe.naver.com/gimibi" target="_blank" rel="noreferrer">CAFE <span>↗</span></a>
+            <a href="https://fancim.me/celeb/profile.aspx?url=324183" target="_blank" rel="noreferrer">FANCIM <span>↗</span></a>
+          </div>
+        </section>
+      </div>
+
+      <div class="marquee">
+        <span>HABI :B <b>·</b> AFTER DARK <b>·</b> 찌꺼기 <b>·</b> 대~따 154 <b>·</b> HABI :B <b>·</b> AFTER DARK <b>·</b> 찌꺼기 <b>·</b> 대~따 154 <b>·</b> </span>
+      </div>
+
+      <footer>
+        <span class="fmark">HABI :B</span>
+        © 2026 HABI OFFICIAL.<br />
+        비즈니스 문의 — 상단 문의 버튼을 이용해 주세요.
+      </footer>
+    </main>
+
+    <div class="mask" id="askMask">
+      <div class="modal" id="askForm">
+        <button class="modal-x" data-close aria-label="닫기">×</button>
+        <span class="kicker">CONTACT</span>
+        <h3>문의하기</h3>
+        <div class="field">
+          <label>내용</label>
+          <textarea class="input" id="askText" placeholder="문의 내용을 입력하세요"></textarea>
+          <p class="hint">남긴 내용은 관리자만 확인합니다.</p>
+        </div>
+        <button class="btn" data-send>보내기</button>
+      </div>
+    </div>
+
+    <div id="fx" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../supabase.js"></script>
+    <script src="../site.js"></script>
+    <script src="../fx.js"></script>
+    <script>
+      (function () {
+        var b = document.getElementById("bday");
+        var now = new Date();
+        var y = now.getFullYear();
+        var t = new Date(y, 0, 12);
+        if (t < new Date(y, now.getMonth(), now.getDate())) t.setFullYear(y + 1);
+        var d = Math.ceil((t - new Date(y, now.getMonth(), now.getDate())) / 86400000);
+        b.textContent = "01.12 " + (d === 0 ? "(오늘 🎉)" : "(D-" + d + ")");
+      })();
+    </script>
+  </body>
+</html>

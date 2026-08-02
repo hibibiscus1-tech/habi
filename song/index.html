@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1180, user-scalable=yes" />
+    <meta name="theme-color" content="#0d0911" />
+    <meta name="description" content="HABI OFFICIAL — 하비 노래책" />
+    <title>하비 HABI · SETLIST</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    />
+    <link rel="stylesheet" href="../site.css" />
+    <script src="../pcview.js"></script>
+    <style>
+      .sig {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: clamp(18px, 3vw, 34px);
+        align-items: center;
+      }
+      .sig-embed {
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #000;
+      }
+      .sig-embed iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+      .sig-meta .kicker {
+        margin-bottom: 12px;
+      }
+      .sig-meta h2 {
+        font-family: var(--display-font);
+        font-size: clamp(30px, 5vw, 52px);
+        font-weight: 950;
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+      }
+      .sig-meta p {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .sig-meta .artist {
+        color: var(--accent);
+      }
+      .filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .filter .chips {
+        gap: 8px;
+      }
+      .filter .chip {
+        cursor: pointer;
+        font-size: 12px;
+        transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+      }
+      .filter .chip.on {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .count {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+      }
+      .songlist {
+        display: grid;
+      }
+      .song {
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        padding: 14px 6px;
+        border-top: 1px solid var(--line);
+      }
+      .song:first-child {
+        border-top: 0;
+      }
+      .song u {
+        color: var(--accent);
+        font-family: var(--display-font);
+        font-size: 13px;
+        text-decoration: none;
+      }
+      .song .t {
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .song .a {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .song .g {
+        padding: 4px 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--muted-strong);
+        font-size: 11px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+      @media (max-width: 720px) {
+        .sig {
+          grid-template-columns: 1fr;
+        }
+        .song {
+          grid-template-columns: 30px 1fr;
+          row-gap: 4px;
+        }
+        .song .g {
+          grid-column: 2;
+          justify-self: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light");
+      try{if(window.self!==window.top)document.body.classList.add('embed');}catch(e){document.body.classList.add('embed');}
+    </script>
+
+    <nav class="nav">
+      <a class="nav-logo" href="../index.html">HABI<em>:B</em></a>
+      <div class="nav-menu">
+        <a href="../index.html">메인</a>
+        <a href="../profile/">프로필</a>
+        <a href="../schedule/">일정</a>
+        <a href="../song/" class="on">노래책</a>
+        <a href="../dress/">옷장</a>
+        <a href="../work/">업보</a>
+      </div>
+      <div class="nav-tools">
+        <a class="open-full" href="?pc=1" target="_blank" rel="noreferrer">PC 화면 ↗</a>
+        <button class="ask-btn" data-open="askMask">문의</button>
+        <button class="icon-btn" data-theme-toggle></button>
+        <button class="nav-burger" aria-label="메뉴"><span></span></button>
+      </div>
+    </nav>
+
+    <main class="wrap">
+      <header class="reel">
+        <div class="reel-no" aria-hidden="true">03</div>
+        <span class="kicker">REEL 03 — SETLIST</span>
+        <h1>SETLIST</h1>
+        <p class="reel-sub">가끔 부르는 하비의 밤 노래. K-POP · 발라드 · 인디 위주.</p>
+      </header>
+
+      <div class="filmstrip"></div>
+
+      <section class="panel" style="margin-bottom: 16px">
+        <div class="panel-h"><h2>SIGNATURE</h2><span class="tag">애창곡</span></div>
+        <div class="sig">
+          <div class="sig-embed">
+            <iframe
+              src="https://www.youtube.com/embed/eSKQaWm-icY"
+              title="하비 애창곡"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="sig-meta">
+            <span class="kicker">MY SONG · TRACK 00</span>
+            <h2>난파</h2>
+            <p><span class="artist">안예은</span> — 하비의 시그니처 트랙</p>
+            <p>어둡고 깊은 밤에 어울리는 한 곡.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-h"><h2>ALL TRACKS</h2><span class="tag">노래 목록</span></div>
+        <div class="filter">
+          <div class="chips" id="genreChips">
+            <span class="chip on" data-g="all">전체</span>
+            <span class="chip" data-g="K-POP">K-POP</span>
+            <span class="chip" data-g="발라드">발라드</span>
+            <span class="chip" data-g="인디">인디</span>
+            <span class="chip" data-g="OST">OST</span>
+          </div>
+          <div class="search">
+            <input id="q" type="search" placeholder="곡 · 아티스트 검색" />
+          </div>
+        </div>
+        <div class="count" id="count"></div>
+        <div class="songlist" id="list"></div>
+        <div class="empty hide" id="empty">
+          <b>NO REEL</b>검색 결과가 없어요.
+        </div>
+      </section>
+
+      <div class="marquee">
+        <span>SETLIST <b>·</b> 안예은 난파 <b>·</b> K-POP <b>·</b> 발라드 <b>·</b> 인디 <b>·</b> SETLIST <b>·</b> 안예은 난파 <b>·</b> K-POP <b>·</b> 발라드 <b>·</b> 인디 <b>·</b> </span>
+      </div>
+
+      <footer>
+        <span class="fmark">HABI :B</span>
+        © 2026 HABI OFFICIAL.<br />
+        비즈니스 문의 — 상단 문의 버튼을 이용해 주세요.
+      </footer>
+    </main>
+
+    <div class="mask" id="askMask">
+      <div class="modal" id="askForm">
+        <button class="modal-x" data-close aria-label="닫기">×</button>
+        <span class="kicker">CONTACT</span>
+        <h3>문의하기</h3>
+        <div class="field">
+          <label>내용</label>
+          <textarea class="input" id="askText" placeholder="문의 내용을 입력하세요"></textarea>
+          <p class="hint">남긴 내용은 관리자만 확인합니다.</p>
+        </div>
+        <button class="btn" data-send>보내기</button>
+      </div>
+    </div>
+
+    <div id="fx" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../supabase.js"></script>
+    <script src="../site.js"></script>
+    <script src="../fx.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        /* Sample setlist — replace with spreadsheet import (original_songs / song table). */
+        var SONGS = [
+          { t: "난파", a: "안예은", g: "인디" },
+          { t: "밤편지", a: "아이유", g: "발라드" },
+          { t: "가을 아침", a: "아이유", g: "발라드" },
+          { t: "좋은 날", a: "아이유", g: "K-POP" },
+          { t: "신호등", a: "이무진", g: "K-POP" },
+          { t: "취기를 빌려", a: "산들", g: "발라드" },
+          { t: "봄날", a: "방탄소년단", g: "K-POP" },
+          { t: "라일락", a: "아이유", g: "K-POP" },
+          { t: "홀씨", a: "안예은", g: "인디" },
+          { t: "그대라는 시", a: "태연", g: "발라드" },
+          { t: "밤하늘의 별을", a: "경서", g: "인디" },
+          { t: "너의 밤은 어때", a: "정승환", g: "발라드" },
+          { t: "롤린", a: "브레이브걸스", g: "K-POP" },
+          { t: "에잇", a: "아이유", g: "K-POP" },
+          { t: "이 노래", a: "2AM", g: "발라드" },
+          { t: "다정히 내 이름을 부르면", a: "경서예지", g: "인디" },
+          { t: "가시", a: "버즈", g: "발라드" },
+          { t: "사건의 지평선", a: "윤하", g: "K-POP" },
+          { t: "우주를 줄게", a: "볼빨간사춘기", g: "인디" },
+          { t: "제야", a: "안예은", g: "OST" },
+        ];
+
+        var list = document.getElementById("list");
+        var empty = document.getElementById("empty");
+        var count = document.getElementById("count");
+        var qEl = document.getElementById("q");
+        var chips = document.querySelectorAll("#genreChips .chip");
+        var genre = "all";
+
+        function render() {
+          var q = (qEl.value || "").trim().toLowerCase();
+          var rows = SONGS.filter(function (s) {
+            var okG = genre === "all" || s.g === genre;
+            var okQ =
+              !q ||
+              s.t.toLowerCase().indexOf(q) > -1 ||
+              s.a.toLowerCase().indexOf(q) > -1;
+            return okG && okQ;
+          });
+          count.textContent = rows.length + " TRACKS";
+          empty.classList.toggle("hide", rows.length > 0);
+          list.innerHTML = rows
+            .map(function (s, i) {
+              return (
+                '<div class="song"><u>' +
+                String(i + 1).padStart(2, "0") +
+                '</u><div><div class="t">' +
+                s.t +
+                '</div><div class="a">' +
+                s.a +
+                '</div></div><span class="g">' +
+                s.g +
+                "</span></div>"
+              );
+            })
+            .join("");
+        }
+        chips.forEach(function (c) {
+          c.addEventListener("click", function () {
+            genre = c.dataset.g;
+            chips.forEach(function (x) {
+              x.classList.toggle("on", x === c);
+            });
+            render();
+          });
+        });
+        qEl.addEventListener("input", render);
+        render();
+      })();
+    </script>
+  </body>
+</html>

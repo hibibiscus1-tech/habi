@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1180, user-scalable=yes" />
+    <meta name="theme-color" content="#0d0911" />
+    <meta name="description" content="HABI OFFICIAL — 하비 방송 일정" />
+    <title>하비 HABI · SCHEDULE</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    />
+    <link rel="stylesheet" href="../site.css" />
+    <script src="../pcview.js"></script>
+    <style>
+      .sc-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .sc-title {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .sc-title strong {
+        font-family: var(--display-font);
+        font-size: clamp(20px, 3vw, 28px);
+        font-weight: 950;
+        letter-spacing: -0.02em;
+      }
+      .sc-title small {
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 950;
+        letter-spacing: 0.2em;
+      }
+      /* weekly */
+      .week {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .wday {
+        display: grid;
+        gap: 6px;
+        min-height: 150px;
+        align-content: start;
+        padding: 16px 14px;
+        border-left: 1px solid var(--line);
+      }
+      .wday:first-child {
+        border-left: 0;
+      }
+      .wday i {
+        color: var(--accent);
+        font-family: var(--display-font);
+        font-size: 12px;
+        font-style: normal;
+      }
+      .wday small {
+        color: var(--muted-strong);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+      }
+      .wday b {
+        margin-top: 8px;
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .wday em {
+        color: var(--muted);
+        font-size: 12px;
+        font-style: normal;
+      }
+      .wday.off {
+        background: var(--panel-2);
+      }
+      .wday.off b {
+        color: var(--muted);
+      }
+      .wday.today {
+        background: var(--accent-soft);
+      }
+      /* monthly */
+      .cal-nav {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .cal-nav strong {
+        font-family: var(--display-font);
+        font-size: 20px;
+        font-weight: 950;
+        letter-spacing: 0.02em;
+      }
+      .cal-nav button {
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: transparent;
+        color: var(--text);
+        font-size: 16px;
+      }
+      .cal-nav button:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .cal-head,
+      .cal {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+      }
+      .cal-head span {
+        padding: 8px 0;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-align: center;
+      }
+      .cal-head span:first-child {
+        color: var(--accent);
+      }
+      .cal {
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .cell {
+        min-height: 84px;
+        padding: 8px 9px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .cell u {
+        display: block;
+        color: var(--muted-strong);
+        font-size: 12px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+      .cell.pad u {
+        color: rgb(255 250 254 / 22%);
+      }
+      body.light .cell.pad u {
+        color: rgb(23 18 27 / 22%);
+      }
+      .cell .dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .cell .lab {
+        margin-top: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.35;
+        color: var(--muted-strong);
+      }
+      .cell .time {
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .cell.off .lab {
+        color: var(--muted);
+      }
+      .cell.event {
+        background: var(--accent-soft);
+      }
+      .cell.event .lab {
+        color: var(--accent);
+        font-weight: 900;
+      }
+      .cell.today u {
+        display: inline-grid;
+        width: 22px;
+        height: 22px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .legend i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        font-style: normal;
+      }
+      .lg-live {
+        background: var(--accent);
+      }
+      .lg-off {
+        border: 1px solid var(--line-strong);
+      }
+      .lg-ev {
+        background: var(--accent-soft);
+        border: 1px solid var(--accent);
+      }
+      .hide {
+        display: none;
+      }
+      @media (max-width: 720px) {
+        .week {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .wday {
+          min-height: 108px;
+        }
+        .wday:nth-child(odd) {
+          border-left: 0;
+        }
+        .cell {
+          min-height: 62px;
+          padding: 6px 5px;
+        }
+        .cell .lab {
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light");
+      try{if(window.self!==window.top)document.body.classList.add('embed');}catch(e){document.body.classList.add('embed');}
+    </script>
+
+    <nav class="nav">
+      <a class="nav-logo" href="../index.html">HABI<em>:B</em></a>
+      <div class="nav-menu">
+        <a href="../index.html">메인</a>
+        <a href="../profile/">프로필</a>
+        <a href="../schedule/" class="on">일정</a>
+        <a href="../song/">노래책</a>
+        <a href="../dress/">옷장</a>
+        <a href="../work/">업보</a>
+      </div>
+      <div class="nav-tools">
+        <a class="open-full" href="?pc=1" target="_blank" rel="noreferrer">PC 화면 ↗</a>
+        <button class="ask-btn" data-open="askMask">문의</button>
+        <button class="icon-btn" data-theme-toggle></button>
+        <button class="nav-burger" aria-label="메뉴"><span></span></button>
+      </div>
+    </nav>
+
+    <main class="wrap">
+      <header class="reel">
+        <div class="reel-no" aria-hidden="true">02</div>
+        <span class="kicker">REEL 02 — SCHEDULE</span>
+        <h1>SCHEDULE</h1>
+        <p class="reel-sub">매일 18:00 · 주 1회 유동 휴방. 주간 흐름과 월간 필름 컷을 함께.</p>
+      </header>
+
+      <div class="filmstrip"></div>
+
+      <section class="panel">
+        <div class="sc-top">
+          <div class="sc-title">
+            <strong>TIMETABLE</strong><small>매일 18:00</small>
+          </div>
+          <div class="seg" role="tablist">
+            <button class="on" data-view="week">주간</button>
+            <button data-view="month">월간</button>
+          </div>
+        </div>
+
+        <div id="weekView">
+          <div class="week" id="weekGrid"></div>
+        </div>
+
+        <div id="monthView" class="hide">
+          <div class="cal-nav">
+            <button id="prevM" aria-label="이전 달">‹</button>
+            <strong id="calLabel"></strong>
+            <button id="nextM" aria-label="다음 달">›</button>
+          </div>
+          <div class="cal-head">
+            <span>일</span><span>월</span><span>화</span><span>수</span
+            ><span>목</span><span>금</span><span>토</span>
+          </div>
+          <div class="cal" id="calGrid"></div>
+        </div>
+
+        <div class="legend">
+          <span><i class="lg-live"></i>방송 18:00</span>
+          <span><i class="lg-off"></i>휴방</span>
+          <span><i class="lg-ev"></i>이벤트 방송</span>
+        </div>
+      </section>
+
+      <div class="marquee">
+        <span>SCHEDULE <b>·</b> 매일 18:00 <b>·</b> AFTER DARK <b>·</b> 주 1회 유동 휴방 <b>·</b> SCHEDULE <b>·</b> 매일 18:00 <b>·</b> AFTER DARK <b>·</b> 주 1회 유동 휴방 <b>·</b> </span>
+      </div>
+
+      <footer>
+        <span class="fmark">HABI :B</span>
+        © 2026 HABI OFFICIAL.<br />
+        비즈니스 문의 — 상단 문의 버튼을 이용해 주세요.
+      </footer>
+    </main>
+
+    <div class="mask" id="askMask">
+      <div class="modal" id="askForm">
+        <button class="modal-x" data-close aria-label="닫기">×</button>
+        <span class="kicker">CONTACT</span>
+        <h3>문의하기</h3>
+        <div class="field">
+          <label>내용</label>
+          <textarea class="input" id="askText" placeholder="문의 내용을 입력하세요"></textarea>
+          <p class="hint">남긴 내용은 관리자만 확인합니다.</p>
+        </div>
+        <button class="btn" data-send>보내기</button>
+      </div>
+    </div>
+
+    <div id="fx" aria-hidden="true"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="../supabase.js"></script>
+    <script src="../site.js"></script>
+    <script src="../fx.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        /* Weekly template. getDay(): 0=Sun ... 6=Sat */
+        var TEMPLATE = [
+          { d: "SUN", label: "유동 휴방", off: true },
+          { d: "MON", label: "저챗", time: "18:00" },
+          { d: "TUE", label: "게임", time: "18:00" },
+          { d: "WED", label: "노래 · 그림", time: "18:00" },
+          { d: "THU", label: "게임", time: "18:00" },
+          { d: "FRI", label: "저챗", time: "18:00" },
+          { d: "SAT", label: "종합게임", time: "18:00" },
+        ];
+        /* Special events, keyed by 'YYYY-M-D' (month 0-based). Replace with DB. */
+        var EVENTS = {};
+        (function seed() {
+          var n = new Date();
+          var y = n.getFullYear(),
+            m = n.getMonth();
+          EVENTS[y + "-" + m + "-14"] = "합방 콜라보";
+          EVENTS[y + "-" + m + "-25"] = "노래 방송";
+        })();
+
+        var order = [1, 2, 3, 4, 5, 6, 0]; /* MON..SUN display order */
+        var wk = document.getElementById("weekGrid");
+        var todayDow = new Date().getDay();
+        wk.innerHTML = order
+          .map(function (i) {
+            var t = TEMPLATE[i];
+            var cls =
+              "wday" +
+              (t.off ? " off" : "") +
+              (i === todayDow ? " today" : "");
+            return (
+              '<div class="' +
+              cls +
+              '"><i>' +
+              String(order.indexOf(i) + 1).padStart(2, "0") +
+              "</i><small>" +
+              t.d +
+              "</small><b>" +
+              t.label +
+              "</b><em>" +
+              (t.off ? "—" : t.time) +
+              "</em></div>"
+            );
+          })
+          .join("");
+
+        /* view toggle */
+        var segs = document.querySelectorAll("[data-view]");
+        segs.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var v = btn.dataset.view;
+            segs.forEach(function (b) {
+              b.classList.toggle("on", b === btn);
+            });
+            document.getElementById("weekView").classList.toggle("hide", v !== "week");
+            document.getElementById("monthView").classList.toggle("hide", v !== "month");
+          });
+        });
+
+        /* monthly */
+        var cur = new Date();
+        cur.setDate(1);
+        var KM = [
+          "1월","2월","3월","4월","5월","6월",
+          "7월","8월","9월","10월","11월","12월",
+        ];
+        function renderMonth() {
+          var y = cur.getFullYear(),
+            m = cur.getMonth();
+          document.getElementById("calLabel").textContent = y + " " + KM[m];
+          var first = new Date(y, m, 1).getDay();
+          var days = new Date(y, m + 1, 0).getDate();
+          var prevDays = new Date(y, m, 0).getDate();
+          var now = new Date();
+          var cells = [];
+          for (var p = first - 1; p >= 0; p -= 1)
+            cells.push('<div class="cell pad"><u>' + (prevDays - p) + "</u></div>");
+          for (var d = 1; d <= days; d += 1) {
+            var dow = new Date(y, m, d).getDay();
+            var t = TEMPLATE[dow];
+            var ev = EVENTS[y + "-" + m + "-" + d];
+            var isToday =
+              now.getFullYear() === y && now.getMonth() === m && now.getDate() === d;
+            var cls =
+              "cell" + (t.off ? " off" : "") + (ev ? " event" : "") + (isToday ? " today" : "");
+            var inner = '<u>' + d + "</u>";
+            if (ev) inner += '<div class="lab">🎬 ' + ev + '</div><div class="time">18:00</div>';
+            else if (t.off) inner += '<div class="lab">휴방</div>';
+            else inner += '<span class="dot"></span><div class="lab">' + t.label + '</div><div class="time">18:00</div>';
+            cells.push('<div class="' + cls + '">' + inner + "</div>");
+          }
+          while (cells.length % 7 !== 0) cells.push('<div class="cell pad"></div>');
+          document.getElementById("calGrid").innerHTML = cells.join("");
+        }
+        document.getElementById("prevM").addEventListener("click", function () {
+          cur.setMonth(cur.getMonth() - 1);
+          renderMonth();
+        });
+        document.getElementById("nextM").addEventListener("click", function () {
+          cur.setMonth(cur.getMonth() + 1);
+          renderMonth();
+        });
+        renderMonth();
+      })();
+    </script>
+  </body>
+</html>

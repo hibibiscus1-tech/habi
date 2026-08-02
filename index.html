@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1180, user-scalable=yes" />
+    <meta name="theme-color" content="#0d0911" />
+    <meta name="description" content="HABI OFFICIAL — 하비 HABI 메인" />
+    <meta property="og:title" content="하비 HABI" />
+    <meta property="og:description" content="HABI OFFICIAL" />
+    <title>하비 HABI</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://profile.img.sooplive.co.kr/LOGO/hi/hibibi1/hibibi1.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./pcview.js"></script>
+  </head>
+  <body class="cover">
+    <script>
+      if (localStorage.getItem("theme") === "light")
+        document.body.classList.add("light");
+      try{if(window.self!==window.top)document.body.classList.add('embed');}catch(e){document.body.classList.add('embed');}
+      if(!document.body.classList.contains('embed')){var _sw=(window.screen&&window.screen.width)||window.innerWidth;if(window.innerWidth>_sw+40){document.body.classList.add('fit');var _d=document.documentElement;_d.style.height='auto';_d.style.overflow='visible';document.body.style.height='auto';document.body.style.overflow='visible';}}
+    </script>
+
+    <nav class="covnav">
+      <span class="cn-logo">HABI<em>:B</em></span>
+      <div class="cn-menu" id="covMenu">
+        <a href="./index.html" class="on">메인</a>
+        <a href="./profile/">프로필</a>
+        <a href="./schedule/">일정</a>
+        <a href="./song/">노래책</a>
+        <a href="./dress/">옷장</a>
+        <a href="./work/">업보</a>
+      </div>
+      <div class="cn-tools">
+        <a class="open-full" href="?pc=1" target="_blank" rel="noreferrer">PC 화면 ↗</a>
+        <button class="cn-ask" id="covAsk">문의</button>
+        <button class="cn-ic" id="covTheme" aria-label="테마 전환">☀</button>
+        <button class="cn-burger" id="covBurger" aria-label="메뉴"><b></b></button>
+      </div>
+    </nav>
+
+    <div id="fx" aria-hidden="true"></div>
+
+    <main class="showcase">
+      <article class="concept layout-after-dark">
+        <figure class="scene" aria-hidden="true">
+          <img src="./assets/habi-cover.webp" alt="" />
+        </figure>
+
+        <div class="composition">
+
+          <section class="title-block" aria-label="하비 메인 타이틀">
+            <span class="title-kicker">HABI :B · FILM 01</span>
+            <h1>
+              <strong>HABI</strong>
+              <small>HABI :B</small>
+            </h1>
+            <p>대~따 즐거운 하비의 메인 화면</p>
+          </section>
+
+          <section class="about-line" aria-label="하비 소개">
+            <span>ABOUT HABI</span>
+            <em>검은 고양이처럼 장난스럽고, 벚꽃처럼 말랑한 하비의 기록.</em>
+          </section>
+
+          <dl class="profile-line" aria-label="하비 프로필 요약">
+            <div><dt>HEIGHT</dt><dd>154</dd></div>
+            <div><dt>DEBUT</dt><dd>2025.02.22</dd></div>
+            <div><dt>BIRTHDAY</dt><dd>01.12</dd></div>
+            <div><dt>FAN NAME</dt><dd>찌꺼기</dd></div>
+          </dl>
+
+          <section class="schedule-flow" aria-label="이번 주 방송 일정">
+            <div class="schedule-heading">
+              <div>
+                <small>WEEKLY FLOW</small>
+                <strong>매일 18:00</strong>
+              </div>
+              <div class="schedule-modes" aria-label="일정 보기 방식">
+                <button
+                  type="button"
+                  data-schedule-mode="week"
+                  class="is-selected"
+                >
+                  주간
+                </button>
+                <button type="button" data-schedule-mode="month">월간</button>
+              </div>
+            </div>
+
+            <div class="schedule-days">
+              <div class="schedule-day">
+                <i>01</i><small>MON</small><b>저챗</b><em>18:00</em>
+              </div>
+              <div class="schedule-day">
+                <i>02</i><small>TUE</small><b>게임</b><em>18:00</em>
+              </div>
+              <div class="schedule-day">
+                <i>03</i><small>WED</small><b>노래 · 그림</b><em>18:00</em>
+              </div>
+              <div class="schedule-day">
+                <i>04</i><small>THU</small><b>게임</b><em>18:00</em>
+              </div>
+              <div class="schedule-day">
+                <i>05</i><small>FRI</small><b>저챗</b><em>18:00</em>
+              </div>
+              <div class="schedule-day">
+                <i>06</i><small>SAT</small><b>종합게임</b><em>18:00</em>
+              </div>
+              <div class="schedule-day is-off">
+                <i>07</i><small>SUN</small><b>FLEX OFF</b><em>—</em>
+              </div>
+            </div>
+
+            <div class="month-grid" aria-label="월간 일정 미리보기"></div>
+          </section>
+
+          <footer class="connect-line">
+            <div class="next-live">
+              <i aria-hidden="true"></i>
+              <span>NEXT LIVE</span>
+              <strong>오늘 · 18:00</strong>
+            </div>
+            <div class="external-links" aria-label="하비 외부 링크">
+              <a
+                href="https://www.sooplive.com/station/hibibi1"
+                target="_blank"
+                rel="noreferrer"
+              >SOOP <span>↗</span></a>
+              <a
+                href="https://www.youtube.com/@hibibiscus"
+                target="_blank"
+                rel="noreferrer"
+              >YOUTUBE <span>↗</span></a>
+              <a
+                href="https://cafe.naver.com/gimibi"
+                target="_blank"
+                rel="noreferrer"
+              >CAFE <span>↗</span></a>
+              <a
+                href="https://fancim.me/celeb/profile.aspx?url=324183"
+                target="_blank"
+                rel="noreferrer"
+              >FANCIM <span>↗</span></a>
+            </div>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <div class="covmask" id="covMask">
+      <div class="covmodal">
+        <button class="x" id="covX" aria-label="닫기">×</button>
+        <span class="k">CONTACT</span>
+        <h3>문의하기</h3>
+        <textarea id="covText" placeholder="문의 내용을 입력하세요"></textarea>
+        <p class="hint">남긴 내용은 관리자만 확인합니다.</p>
+        <button class="send" id="covSend">보내기</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="./supabase.js"></script>
+    <script src="./app.js" defer></script>
+    <script src="./fx.js"></script>
+    <script>
+      (function () {
+        "use strict";
+        var body = document.body;
+        var theme = document.getElementById("covTheme");
+        function glyph() {
+          theme.textContent = body.classList.contains("light") ? "☾" : "☀";
+        }
+        glyph();
+        theme.addEventListener("click", function () {
+          body.classList.toggle("light");
+          localStorage.setItem(
+            "theme",
+            body.classList.contains("light") ? "light" : "dark",
+          );
+          glyph();
+        });
+        var menu = document.getElementById("covMenu");
+        document
+          .getElementById("covBurger")
+          .addEventListener("click", function () {
+            menu.classList.toggle("open");
+          });
+        var mask = document.getElementById("covMask");
+        function close() {
+          mask.classList.remove("open");
+        }
+        document.getElementById("covAsk").addEventListener("click", function () {
+          mask.classList.add("open");
+        });
+        document.getElementById("covX").addEventListener("click", close);
+        mask.addEventListener("click", function (e) {
+          if (e.target === mask) close();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") close();
+        });
+        document
+          .getElementById("covSend")
+          .addEventListener("click", async function () {
+            var t = document.getElementById("covText");
+            var v = (t.value || "").trim();
+            if (!v) return;
+            var ok =
+              typeof insertRow === "function"
+                ? await insertRow("inquiries", { message: v })
+                : true;
+            if (!ok) return;
+            t.value = "";
+            close();
+            var toast = document.createElement("div");
+            toast.textContent = "문의가 전송되었습니다";
+            toast.style.cssText =
+              "position:fixed;z-index:60;bottom:26px;left:50%;transform:translateX(-50%);" +
+              "padding:12px 20px;border:1px solid var(--accent);border-radius:999px;" +
+              "background:#140e18;color:var(--text);font-size:13px;font-weight:700";
+            document.body.appendChild(toast);
+            setTimeout(function () {
+              toast.remove();
+            }, 2200);
+          });
+      })();
+    </script>
+  </body>
+</html>

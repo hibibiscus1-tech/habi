@@ -137,6 +137,17 @@ figure {
   object-position: 52% 42%;
 }
 
+/* dark = neon city (default), light = original cover selfie */
+.scene .scene-light {
+  display: none;
+}
+body.light .scene .scene-dark {
+  display: none;
+}
+body.light .scene .scene-light {
+  display: block;
+}
+
 .scene::after {
   position: absolute;
   inset: 0;
